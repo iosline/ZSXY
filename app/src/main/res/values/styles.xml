@@ -1,0 +1,22 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:screenOrientation">portrait</item>
+    </style>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+
+        <!--<item name="android:fitsSystemWindows">true</item>-->
+        <item name="android:screenOrientation">portrait</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="PhotoPickTheme" parent="AppBaseTheme">
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+</resources>
