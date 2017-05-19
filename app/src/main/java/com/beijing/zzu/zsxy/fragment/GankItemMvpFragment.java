@@ -1,21 +1,23 @@
 package com.beijing.zzu.zsxy.fragment;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 
 import com.beijing.zzu.zsxy.R;
+import com.beijing.zzu.zsxy.activity.GankDetailActivity;
 import com.beijing.zzu.zsxy.adapter.GankItemAdapter;
 import com.beijing.zzu.zsxy.adapter.OnItemClickListeners;
 import com.beijing.zzu.zsxy.adapter.OnLoadMoreListener;
 import com.beijing.zzu.zsxy.adapter.ViewHolder;
 import com.beijing.zzu.zsxy.model.GankItem;
 import com.beijing.zzu.zsxy.presenter.GankItemPresenter;
-import com.beijing.zzu.zsxy.utils.CommonUtils;
 import com.beijing.zzu.zsxy.view.GankItemView;
 
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ import butterknife.OnClick;
  * Created by jiayongkai on 2017/4/18.
  */
 
-public class GankItemFragment extends BaseFragment<GankItemView,GankItemPresenter> implements GankItemView, SwipeRefreshLayout.OnRefreshListener {
+public class GankItemMvpFragment extends BaseMvpFragment<GankItemView,GankItemPresenter> implements GankItemView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.type_item_recyclerview)
     RecyclerView mRecyclerView;
@@ -82,7 +84,11 @@ public class GankItemFragment extends BaseFragment<GankItemView,GankItemPresente
         gankItemAdapter.setOnItemClickListener(new OnItemClickListeners<GankItem>() {
             @Override
             public void onItemClick(ViewHolder viewHolder, GankItem data, int position) {
-
+                Intent intent=new Intent(mActivity, GankDetailActivity.class);
+                intent.putExtra("gank_item", gankItemList.get(position));
+                ActivityOptionsCompat optionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation
+                        (getActivity(), viewHolder.getView(R.id.gank_item_icon), "shareView");
+                ActivityCompat.startActivity(getActivity(),intent,optionsCompat.toBundle());
             }
         });
 
@@ -131,7 +137,7 @@ public class GankItemFragment extends BaseFragment<GankItemView,GankItemPresente
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_gank;
+        return R.layout.fragment_type_item_layout;
     }
 
     @Override
@@ -179,5 +185,13 @@ public class GankItemFragment extends BaseFragment<GankItemView,GankItemPresente
             mSwipeRefreshLayout.setRefreshing(false);
             gankItemAdapter.setNewData(datas);
         }
+    }
+
+    public static GankItemMvpFragment newInstance(String type){
+        GankItemMvpFragment fragment=new GankItemMvpFragment();
+        Bundle args=new Bundle();
+        args.putString("type",type);
+        fragment.setArguments(args);
+        return fragment;
     }
 }

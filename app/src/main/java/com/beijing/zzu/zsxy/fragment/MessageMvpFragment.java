@@ -1,14 +1,14 @@
 package com.beijing.zzu.zsxy.fragment;
 
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.presenter.MySelfPresenter;
-import com.beijing.zzu.zsxy.view.MySelfView;
+import com.beijing.zzu.zsxy.presenter.MessagePresenter;
+import com.beijing.zzu.zsxy.view.MessageView;
 
 /**
  * Created by jiayongkai on 2017/4/14.
  */
 
-public class MySelfFragment extends BaseFragment<MySelfView,MySelfPresenter> implements MySelfView{
+public class MessageMvpFragment extends BaseMvpFragment<MessageView,MessagePresenter> implements MessageView{
     @Override
     protected void initData() {
 
@@ -16,7 +16,7 @@ public class MySelfFragment extends BaseFragment<MySelfView,MySelfPresenter> imp
 
     @Override
     protected void initPresenter() {
-      presenter=new MySelfPresenter();
+        presenter=new MessagePresenter();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class MySelfFragment extends BaseFragment<MySelfView,MySelfPresenter> imp
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_myslef;
+        return R.layout.fragment_message;
     }
 
     @Override

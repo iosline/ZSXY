@@ -70,11 +70,25 @@ public class PrefectUserInfoAcitivity extends BaseMvpAcitivity<PrefectUserInfoVi
 
     }
 
+
     @Override
-    protected void updateViews() {
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_prefect_userinfo;
+    }
+
+    @Override
+    protected void fetchData() {
         presenter.getUserInfo();
-
-
 
         sexRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -92,16 +106,6 @@ public class PrefectUserInfoAcitivity extends BaseMvpAcitivity<PrefectUserInfoVi
                 Log.d("sex==",default_sex+"");
             }
         });
-    }
-
-    @Override
-    protected void initViews() {
-
-    }
-
-    @Override
-    protected int getLayoutRes() {
-        return R.layout.activity_prefect_userinfo;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.beijing.zzu.zsxy.api;
 
 
 import com.beijing.zzu.zsxy.model.GankItem;
+import com.beijing.zzu.zsxy.net.Api;
 
 import java.util.List;
 
@@ -14,9 +15,9 @@ import rx.Observable;
  * Created by jiayongkai on 2017/4/18.
  */
 
-public interface HttpService {
+public interface GankService {
 
-    public static String BASE_URL="http://gank.io/api/";
+    public static String BASE_URL= Api.URL_GET_GANK;
 
 //    分类数据: http://gank.io/api/data/数据类型/请求个数/第几页
 //
@@ -26,7 +27,6 @@ public interface HttpService {
 
     @GET("data/{type}/10/{page}")
     Observable<HttpResult<List<GankItem>>> getGankItemList(@Path("type") String type,@Path("page") String page);
-
 
 
 }

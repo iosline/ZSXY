@@ -1,14 +1,14 @@
 package com.beijing.zzu.zsxy.fragment;
 
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.presenter.UnusedPresenter;
-import com.beijing.zzu.zsxy.view.UnusedView;
+import com.beijing.zzu.zsxy.presenter.MySelfPresenter;
+import com.beijing.zzu.zsxy.view.MySelfView;
 
 /**
  * Created by jiayongkai on 2017/4/14.
  */
 
-public class UnusedFragment extends BaseFragment<UnusedView,UnusedPresenter> implements UnusedView{
+public class MySelfMvpFragment extends BaseMvpFragment<MySelfView,MySelfPresenter> implements MySelfView{
     @Override
     protected void initData() {
 
@@ -16,7 +16,7 @@ public class UnusedFragment extends BaseFragment<UnusedView,UnusedPresenter> imp
 
     @Override
     protected void initPresenter() {
-        presenter=new UnusedPresenter();
+      presenter=new MySelfPresenter();
     }
 
     @Override
@@ -26,7 +26,7 @@ public class UnusedFragment extends BaseFragment<UnusedView,UnusedPresenter> imp
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_unused;
+        return R.layout.fragment_myslef;
     }
 
     @Override

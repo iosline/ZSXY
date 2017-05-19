@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
  * Created by jiayongkai on 2017/4/11.
  */
 
-public abstract class BaseMvpAcitivity<V,T extends BasePresenter<V>> extends AppCompatActivity{
+public abstract class BaseMvpAcitivity<V,T extends BasePresenter<V>> extends BaseAcitivity{
 
     public T presenter;
 
@@ -22,23 +22,12 @@ public abstract class BaseMvpAcitivity<V,T extends BasePresenter<V>> extends App
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         initPresenter();
-        setContentView(getLayoutRes());
-        ButterKnife.bind(this);
-        initViews();
-        setSaveInstanceState(savedInstanceState);
-        updateViews();
+        fetchData();
     }
 
-    protected  void setSaveInstanceState(Bundle savedInstanceState){
-
-    }
-
-    protected abstract void updateViews();
-
-    protected abstract void initViews();
 
 
-    protected abstract int getLayoutRes();
+    protected abstract void fetchData();
 
     protected abstract void initPresenter() ;
 

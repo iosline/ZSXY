@@ -5,7 +5,6 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,7 +52,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         ViewHolder viewHolder = null;
         switch (viewType) {
             case TYPE_COMMON_VIEW:
-                viewHolder = ViewHolder.create(mContext, getItemLayoutId(),null);
+                viewHolder = ViewHolder.create(mContext, getItemLayoutId(), null);
                 break;
             case TYPE_FOOTER_VIEW:
                 if (mFooterLayout == null) {
@@ -138,6 +137,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         super.onViewAttachedToWindow(holder);
         if (isFooterView(holder.getLayoutPosition())) {
             ViewGroup.LayoutParams lp = holder.itemView.getLayoutParams();
+
             if (lp != null && lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                 StaggeredGridLayoutManager.LayoutParams p = (StaggeredGridLayoutManager.LayoutParams) lp;
                 p.setFullSpan(true);
@@ -181,6 +181,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         if (!mOpenLoadMore || mLoadMoreListener == null) {
             return;
         }
+
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

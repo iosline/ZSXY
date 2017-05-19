@@ -1,20 +1,18 @@
 package com.beijing.zzu.zsxy.activity;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.beijing.zzu.zsxy.Constants;
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.fragment.GankItemFactory;
+import com.beijing.zzu.zsxy.fragment.GankItemMvpFragment;
+import com.beijing.zzu.zsxy.utils.ResourceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +21,30 @@ import java.util.List;
  * Created by jiayongkai on 2017/4/17.
  */
 
-public class GankActivity extends AppCompatActivity{
+public class GankActivity extends BaseAcitivity{
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gank);
+    protected void initData() {
+
+    }
+
+    @Override
+    protected void initView() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("知识点");
         setSupportActionBar(toolbar);
 
         final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.mipmap.icon_back_normal);
+//        ab.setHomeAsUpIndicator(R.mipmap.icon_back_normal);
         ab.setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         if (viewPager != null) {
@@ -46,13 +55,17 @@ public class GankActivity extends AppCompatActivity{
         tabLayout.setupWithViewPager(viewPager);
     }
 
+    @Override
+    protected int getLayoutRes() {
+        return R.layout.activity_gank;
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
-        adapter.addFragment(GankItemFactory.getGankItmeFragment(Constants.GANK_TYPE_ALL), Constants.GANK_TYPE_ALL);
-        adapter.addFragment(GankItemFactory.getGankItmeFragment(Constants.GANK_TYPE_ANDROID), Constants.GANK_TYPE_ANDROID);
-        adapter.addFragment(GankItemFactory.getGankItmeFragment(Constants.GANK_TYPE_IOS), Constants.GANK_TYPE_IOS);
-        adapter.addFragment(GankItemFactory.getGankItmeFragment(Constants.GANK_TYPE_WEB), Constants.GANK_TYPE_WEB);
-        adapter.addFragment(GankItemFactory.getGankItmeFragment(Constants.GANK_TYPE_TUOZHAN), Constants.GANK_TYPE_TUOZHAN);
+        List<String> types = ResourceUtil.stringArrayToList(this, R.array.gank);
+        for (int i = 0; i < types.size(); i++) {
+            adapter.addFragment(GankItemMvpFragment.newInstance(types.get(i)),types.get(i));
+        }
         viewPager.setAdapter(adapter);
     }
 
@@ -83,6 +96,8 @@ public class GankActivity extends AppCompatActivity{
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+
+
     }
 
     @Override
@@ -94,4 +109,5 @@ public class GankActivity extends AppCompatActivity{
         }
         return super.onOptionsItemSelected(item);
     }
+
 }

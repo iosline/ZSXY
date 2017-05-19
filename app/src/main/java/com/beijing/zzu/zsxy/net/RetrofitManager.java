@@ -11,6 +11,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 /**
  * Created by jiayongkai on 2017/4/18.
@@ -44,6 +45,18 @@ public class RetrofitManager {
                 .build();
         return retrofit.create(service);
     }
+
+
+    public <S> S create1(Class<S> service) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .client(getOkhttpClient())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .baseUrl(getBaseUrl(service))
+                .build();
+        return retrofit.create(service);
+    }
+
 
     private OkHttpClient getOkhttpClient() {
 

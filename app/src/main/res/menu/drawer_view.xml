@@ -9,7 +9,11 @@
         <item
             android:id="@+id/nav_picture"
             android:icon="@mipmap/ic_event"
-            android:title="图片" />
+            android:title="妹纸" />
+        <item
+            android:id="@+id/nav_video"
+            android:icon="@mipmap/ic_headset"
+            android:title="视频" />
         <item
             android:id="@+id/nav_music"
             android:icon="@mipmap/ic_headset"

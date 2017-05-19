@@ -15,12 +15,4 @@ public class Constants {
     public static String PASSWORD="password";
     public static String USER_OBJECTID="user_objectId";
 
-
-    //数据类型： 福利 | Android | iOS | 休息视频 | 拓展资源 | 前端 | all
-    public static String GANK_TYPE_ALL="all";
-    public static String GANK_TYPE_ANDROID="Android";
-    public static String GANK_TYPE_IOS="iOS";
-    public static String GANK_TYPE_WEB="前端";
-    public static String GANK_TYPE_TUOZHAN="拓展资源";
-
 }

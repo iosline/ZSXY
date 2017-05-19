@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.beijing.zzu.zsxy.BaseApplication;
 import com.beijing.zzu.zsxy.R;
@@ -24,7 +23,7 @@ import butterknife.OnClick;
  * Created by jiayongkai on 2017/4/12.
  */
 
-public class RegistFragment extends BaseFragment<RegistView,RegistPresenter> implements RegistView{
+public class RegistMvpFragment extends BaseMvpFragment<RegistView,RegistPresenter> implements RegistView{
 
     @BindView(R.id.next)
     PaperButton nextBt;

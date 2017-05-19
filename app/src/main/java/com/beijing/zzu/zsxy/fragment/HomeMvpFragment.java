@@ -1,14 +1,15 @@
 package com.beijing.zzu.zsxy.fragment;
 
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.presenter.MessagePresenter;
-import com.beijing.zzu.zsxy.view.MessageView;
+import com.beijing.zzu.zsxy.presenter.HomePresenter;
+import com.beijing.zzu.zsxy.view.HomeView;
 
 /**
  * Created by jiayongkai on 2017/4/14.
  */
 
-public class MessageFragment extends BaseFragment<MessageView,MessagePresenter> implements MessageView{
+public class HomeMvpFragment extends BaseMvpFragment<HomeView,HomePresenter> implements HomeView{
+
     @Override
     protected void initData() {
 
@@ -16,7 +17,7 @@ public class MessageFragment extends BaseFragment<MessageView,MessagePresenter> 
 
     @Override
     protected void initPresenter() {
-        presenter=new MessagePresenter();
+      presenter=new HomePresenter();
     }
 
     @Override
@@ -26,7 +27,7 @@ public class MessageFragment extends BaseFragment<MessageView,MessagePresenter> 
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_message;
+        return R.layout.fragment_home;
     }
 
     @Override

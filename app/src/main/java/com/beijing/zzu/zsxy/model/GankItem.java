@@ -1,12 +1,13 @@
 package com.beijing.zzu.zsxy.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by jiayongkai on 2017/4/18.
  */
 
-public class GankItem {
+public class GankItem implements Serializable{
 
     /**
      * _id : 58ed9741421aa9544825f85c

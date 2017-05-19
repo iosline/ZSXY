@@ -1,5 +1,7 @@
 package com.beijing.zzu.zsxy.rx;
 
+import android.util.Log;
+
 import com.beijing.zzu.zsxy.utils.CommonUtils;
 
 import java.io.IOException;
@@ -39,13 +41,14 @@ public abstract class RxSubscriber<T> extends Subscriber<T> {
     }
     @Override
     public void onError(Throwable e) {
-        //统一处理请求异常的情况
-        if (e instanceof IOException){
-            CommonUtils.showToast("网络连接异常...");
-        }else {
-            CommonUtils.showToast(e.toString());
-        }
 
+        //统一处理请求异常的情况
+//        if (e instanceof IOException){
+//            CommonUtils.showToast("网络连接异常...");
+//        }else {
+            CommonUtils.showToast(e.toString());
+//        }
+        Log.d("tag","error+msg"+e.toString());
         _onError();
         cancelLoading();
     }

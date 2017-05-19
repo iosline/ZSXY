@@ -19,4 +19,8 @@
     <style name="PhotoPickTheme" parent="AppBaseTheme">
         <item name="android:fitsSystemWindows">true</item>
     </style>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 </resources>

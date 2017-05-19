@@ -7,7 +7,6 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.beijing.zzu.zsxy.BaseApplication;
 import com.beijing.zzu.zsxy.Constants;
 import com.beijing.zzu.zsxy.R;
 import com.beijing.zzu.zsxy.presenter.LoginPresenter;
@@ -25,7 +24,7 @@ import butterknife.OnClick;
  * Created by jiayongkai on 2017/4/12.
  */
 
-public class LoginFragment extends BaseFragment<LoginView,LoginPresenter> implements LoginView{
+public class LoginMvpFragment extends BaseMvpFragment<LoginView,LoginPresenter> implements LoginView{
 
     @BindView(R.id.userph)
     EditTextWithDel userphone;

@@ -1,17 +1,14 @@
 package com.beijing.zzu.zsxy.fragment;
 
-import android.support.v4.app.Fragment;
-
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.presenter.HomePresenter;
-import com.beijing.zzu.zsxy.view.HomeView;
+import com.beijing.zzu.zsxy.presenter.UnusedPresenter;
+import com.beijing.zzu.zsxy.view.UnusedView;
 
 /**
  * Created by jiayongkai on 2017/4/14.
  */
 
-public class HomeFragment extends BaseFragment<HomeView,HomePresenter> implements HomeView{
-
+public class UnusedMvpFragment extends BaseMvpFragment<UnusedView,UnusedPresenter> implements UnusedView{
     @Override
     protected void initData() {
 
@@ -19,7 +16,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter> implement
 
     @Override
     protected void initPresenter() {
-      presenter=new HomePresenter();
+        presenter=new UnusedPresenter();
     }
 
     @Override
@@ -29,7 +26,7 @@ public class HomeFragment extends BaseFragment<HomeView,HomePresenter> implement
 
     @Override
     protected int getLayoutRes() {
-        return R.layout.fragment_home;
+        return R.layout.fragment_unused;
     }
 
     @Override
