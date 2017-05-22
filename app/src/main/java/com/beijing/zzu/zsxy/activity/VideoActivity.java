@@ -1,30 +1,16 @@
 package com.beijing.zzu.zsxy.activity;
 
-import android.content.Intent;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.adapter.OnItemClickListeners;
-import com.beijing.zzu.zsxy.adapter.OnLoadMoreListener;
-import com.beijing.zzu.zsxy.adapter.VideoListAdapter;
-import com.beijing.zzu.zsxy.adapter.ViewHolder;
 import com.beijing.zzu.zsxy.fragment.VideoItemFragment;
-import com.beijing.zzu.zsxy.model.VideoItemData;
-import com.beijing.zzu.zsxy.presenter.VideoPresenter;
 import com.beijing.zzu.zsxy.utils.ResourceUtil;
-import com.beijing.zzu.zsxy.view.VideoView;
 
 import java.util.ArrayList;
 import java.util.List;
