@@ -26,4 +26,27 @@
         <item>4</item>
         <item>5</item>
     </string-array>
+
+
+    <string-array name="video">
+        <item>热门</item>
+        <item>明星名人</item>
+        <item>热点</item>
+        <item>女神</item>
+        <item>创意</item>
+        <item>搞笑</item>
+        <item>宝宝</item>
+    </string-array>
+
+    <string-array name="video_cid">
+        <item>2002</item>
+        <item>124</item>
+        <item>136</item>
+        <item>132</item>
+        <item>160</item>
+        <item>128</item>
+        <item>144</item>
+    </string-array>
+
+
 </resources>

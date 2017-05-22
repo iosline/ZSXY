@@ -3,6 +3,7 @@ package com.beijing.zzu.zsxy.utils;
 import android.util.Log;
 
 import com.beijing.zzu.zsxy.model.GirlItemData;
+import com.beijing.zzu.zsxy.model.VideoItemData;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -54,4 +55,5 @@ public class JsoupUtil {
 
         return list;
     }
+
 }

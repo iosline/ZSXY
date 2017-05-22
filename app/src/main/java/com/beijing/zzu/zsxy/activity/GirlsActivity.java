@@ -40,11 +40,7 @@ public class GirlsActivity extends BaseAcitivity {
          titles=ResourceUtil.stringArrayToList(this,R.array.girl);
          subtypes=ResourceUtil.stringArrayToList(this,R.array.girl_cid);
 
-        for (int i = 0; i < subtypes.size(); i++) {
-            mFragments.add(GirlItemFragment.newInstance(subtypes.get(i)));
-        }
 
-        mPager.setAdapter(new Adapter(getSupportFragmentManager()));
     }
 
      class Adapter extends FragmentPagerAdapter {
@@ -74,7 +70,7 @@ public class GirlsActivity extends BaseAcitivity {
 
     @Override
     protected void initView() {
-        mToolbar.setTitle("妹纸");
+        mToolbar.setTitle(ResourceUtil.resToStr(this,R.string.girl));
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +81,11 @@ public class GirlsActivity extends BaseAcitivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        for (int i = 0; i < subtypes.size(); i++) {
+            mFragments.add(GirlItemFragment.newInstance(subtypes.get(i)));
+        }
+
+        mPager.setAdapter(new Adapter(getSupportFragmentManager()));
         mTablayout.setupWithViewPager(mPager);
     }
 

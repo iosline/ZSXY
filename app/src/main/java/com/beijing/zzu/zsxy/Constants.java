@@ -15,4 +15,6 @@ public class Constants {
     public static String PASSWORD="password";
     public static String USER_OBJECTID="user_objectId";
 
+    public static int VIDEO_PAGE_SIZE=20;   //视频每页加载的数量
+
 }

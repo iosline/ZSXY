@@ -41,6 +41,8 @@
 
         <activity android:name=".activity.GirlDetailActivity"/>
 
+        <activity android:name=".activity.VideoActivity"/>
+
         <service android:name=".service.DataService"/>
     </application>
 
