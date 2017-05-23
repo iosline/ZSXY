@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import fm.jiecao.jcvideoplayer_lib.JCVideoPlayer;
 
 /**
  * Created by jiayongkai on 2017/5/22.
@@ -133,10 +134,12 @@ public class VideoItemFragment extends BaseMvpFragment<VideoView,VideoPresenter>
 
     @Override
     public void onRefresh() {
+        JCVideoPlayer.releaseAllVideos();
         isLoadMore = false;
         PAGE_COUNT = 1;
         fetchData();
     }
+
 
     public static VideoItemFragment newInstance(String cateid){
         VideoItemFragment fragment=new VideoItemFragment();
@@ -145,4 +148,6 @@ public class VideoItemFragment extends BaseMvpFragment<VideoView,VideoPresenter>
         fragment.setArguments(args);
         return fragment;
     }
+
+
 }
