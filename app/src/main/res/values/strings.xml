@@ -6,8 +6,15 @@
     <string name="gank">干货</string>
     <string name="girl">妹纸</string>
     <string name="video">视频</string>
+    <string name="music">音乐</string>
+    <string name="wether">天气</string>
     <string name="share">分享</string>
     <string name="set">设置</string>
     <string name="about">关于</string>
     <string name="copy">复制链接</string>
+
+    <string name="back_pressed_tip">再按就要说再见了</string>
+
+    <string name="splash_copyright">Copyright &#169; 2015 ZSXY All Rights Reserved\nPowered by Obsessive and Chris</string>
+    <string name="splash_version">V %1$s</string>
 </resources>

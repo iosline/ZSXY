@@ -5,23 +5,23 @@
         <item
             android:id="@+id/nav_news"
             android:icon="@mipmap/ic_dashboard"
-            android:title="知识点" />
+            android:title="@string/gank" />
         <item
             android:id="@+id/nav_picture"
             android:icon="@mipmap/ic_event"
-            android:title="妹纸" />
+            android:title="@string/girl" />
         <item
             android:id="@+id/nav_video"
             android:icon="@mipmap/ic_headset"
-            android:title="视频" />
+            android:title="@string/video" />
         <item
             android:id="@+id/nav_music"
             android:icon="@mipmap/ic_headset"
-            android:title="音乐" />
+            android:title="@string/music" />
         <item
             android:id="@+id/nav_wether"
             android:icon="@mipmap/ic_forum"
-            android:title="天气" />
+            android:title="@string/wether" />
     </group>
 
     <item android:title="Sub items">

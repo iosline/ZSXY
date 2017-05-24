@@ -45,13 +45,19 @@ public class TypeFragment extends BaseFragment {
         if (ResourceUtil.resToStr(mActivity,R.string.gank).equals(mType)){
             mTitles=ResourceUtil.stringArrayToList(mActivity,R.array.gank);
             for (String title: mTitles) {
-//                mFragments.add();
+                mFragments.add(GankItemMvpFragment.newInstance(title));
             }
         }else if (ResourceUtil.resToStr(mActivity,R.string.girl).equals(mType)){
             mTitles=ResourceUtil.stringArrayToList(mActivity,R.array.girl);
             List<String> subtypes=ResourceUtil.stringArrayToList(mActivity,R.array.girl_cid);
             for(String subtype:subtypes){
-//                mFragments.add()
+                mFragments.add(GirlItemFragment.newInstance(subtype));
+            }
+        }else if (ResourceUtil.resToStr(mActivity,R.string.video).equals(mType)){
+            mTitles=ResourceUtil.stringArrayToList(mActivity,R.array.video);
+            List<String> subtypes=ResourceUtil.stringArrayToList(mActivity,R.array.video_cid);
+            for(String subtype:subtypes){
+                mFragments.add(VideoItemFragment.newInstance(subtype));
             }
         }
 

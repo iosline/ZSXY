@@ -28,12 +28,8 @@ public abstract class BaseAcitivity extends AppCompatActivity{
 
         initData();
         initView();
-        setSaveInstanceState(savedInstanceState);
     }
 
-    protected  void setSaveInstanceState(Bundle savedInstanceState){
-
-    }
     protected abstract void initData();
 
 
@@ -41,14 +37,6 @@ public abstract class BaseAcitivity extends AppCompatActivity{
 
 
     protected abstract int getLayoutRes();
-
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-
-    }
 
     @Override
     protected void onDestroy() {

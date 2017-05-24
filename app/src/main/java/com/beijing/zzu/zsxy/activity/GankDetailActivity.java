@@ -15,8 +15,10 @@ import android.widget.ProgressBar;
 import com.beijing.zzu.zsxy.R;
 import com.beijing.zzu.zsxy.model.GankItem;
 import com.beijing.zzu.zsxy.utils.CopyUtil;
+import com.beijing.zzu.zsxy.utils.NetStatusUtil;
 import com.beijing.zzu.zsxy.utils.PreferencesUtils;
 import com.beijing.zzu.zsxy.utils.SnackBarUtil;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
 
@@ -32,6 +34,9 @@ public class GankDetailActivity extends BaseAcitivity {
 
     @BindView(R.id.gank_detail_progress)
     ProgressBar mProgressBar;
+
+    @BindView(R.id.gank_detail_loading)
+    AVLoadingIndicatorView mLoading;
 
 
     @Override
@@ -53,6 +58,14 @@ public class GankDetailActivity extends BaseAcitivity {
         webSetting.setLoadsImagesAutomatically(true);
         webSetting.setBlockNetworkImage(true);
 
+        //有网 就默认的加载网络数据  没有 就加载缓存
+        if (NetStatusUtil.isNetworkAvailable(this)){
+            webSetting.setCacheMode(WebSettings.LOAD_DEFAULT);
+        } else {
+            webSetting.setCacheMode(
+                    WebSettings.LOAD_CACHE_ELSE_NETWORK);
+        }
+
         mWebView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onProgressChanged(WebView view, int newProgress) {
@@ -68,8 +81,10 @@ public class GankDetailActivity extends BaseAcitivity {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
+                mLoading.hide();
                 webSetting.setBlockNetworkImage(false);
 
+                //默认跳转到上次阅读的位置
                 int position = PreferencesUtils.getInt(gankItem.getUrl());
                 mWebView.scrollTo(0,position);
             }

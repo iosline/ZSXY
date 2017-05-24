@@ -15,10 +15,4 @@
         <attr name="paper_shadow_color" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="MainNavigateTabBar">
-        <attr name="navigateTabTextColor" format="color|reference" />
-        <attr name="navigateTabSelectedTextColor" format="color|reference" />
-        <attr name="containerId" format="integer|reference" />
-        <attr name="navigateTabTextSize" format="dimension|reference" />
-    </declare-styleable>
 </resources>

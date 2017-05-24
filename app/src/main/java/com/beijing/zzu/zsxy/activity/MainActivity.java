@@ -1,24 +1,30 @@
 package com.beijing.zzu.zsxy.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
+import android.os.Build;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.beijing.zzu.zsxy.R;
-import com.beijing.zzu.zsxy.fragment.HomeMvpFragment;
-import com.beijing.zzu.zsxy.fragment.MessageMvpFragment;
-import com.beijing.zzu.zsxy.fragment.MySelfMvpFragment;
-import com.beijing.zzu.zsxy.fragment.UnusedMvpFragment;
+import com.beijing.zzu.zsxy.fragment.BaseFragment;
+import com.beijing.zzu.zsxy.fragment.TypeFragment;
 import com.beijing.zzu.zsxy.utils.CommonUtils;
-import com.beijing.zzu.zsxy.widget.MainNavigateTabBar;
+import com.beijing.zzu.zsxy.utils.ResourceUtil;
+import com.beijing.zzu.zsxy.utils.SnackBarUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import butterknife.BindView;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
@@ -27,35 +33,62 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends BaseAcitivity{
 
-    private static final String TAG_PAGE_HOME = "首页";
-    private static final String TAG_PAGE_CITY = "同城";
-    private static final String TAG_PAGE_PUBLISH = "发布";
-    private static final String TAG_PAGE_MESSAGE = "消息";
-    private static final String TAG_PAGE_PERSON = "我的";
+    private String mCurrentType;
+    private boolean isBackPressed;
+    private Map<String,BaseFragment> mTypeFragments;
 
-    private DrawerLayout mDrawerLayout;
-    private MainNavigateTabBar mNavigateTabBar;
+    @BindView(R.id.drawer_layout)
+    DrawerLayout mDrawerLayout;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
 
     @Override
     protected void initData() {
-
+        mTypeFragments=new HashMap<>();
     }
 
     @Override
     protected void initView() {
-        mDrawerLayout= (DrawerLayout) findViewById(R.id.drawer_layout);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        initStatusBar();
 
-        final ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
-        ab.setDisplayHomeAsUpEnabled(true);
+        initDrawer();
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        initNavigationView();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        doReplace(ResourceUtil.resToStr(mContext,R.string.gank));
+
+    }
+
+    private void doReplace(String type) {
+        if (!type.equals(mCurrentType)){
+            repalceFragment(TypeFragment.newInstance(type),type,mCurrentType);
+            mCurrentType=type;
+        }
+    }
+
+    private void repalceFragment(BaseFragment fragment, String type, String lastType) {
+        toolbar.setTitle(type);
+        if (mTypeFragments.get(type) == null){
+            mTypeFragments.put(type,fragment);
+
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.main_container,fragment,type).commit();
+        }
+
+        if (mTypeFragments.get(lastType) != null){
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.hide(mTypeFragments.get(lastType))
+                    .show(mTypeFragments.get(type))
+                    .commit();
+        }
+    }
+
+    private void initNavigationView() {
         View navHeaderview=navigationView.getHeaderView(0);
         CircleImageView profile_image= (CircleImageView) navHeaderview.findViewById(R.id.profile_image);
         profile_image.setOnClickListener(new View.OnClickListener() {
@@ -74,13 +107,13 @@ public class MainActivity extends BaseAcitivity{
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.nav_news:
-                        startActivity(new Intent(MainActivity.this,GankActivity.class));
+                        doReplace(ResourceUtil.resToStr(mContext,R.string.gank));
                         break;
                     case R.id.nav_picture:
-                        startActivity(new Intent(MainActivity.this,GirlsActivity.class));
+                        doReplace(ResourceUtil.resToStr(mContext,R.string.girl));
                         break;
                     case R.id.nav_video:
-                        startActivity(new Intent(MainActivity.this,VideoActivity.class));
+                        doReplace(ResourceUtil.resToStr(mContext,R.string.video));
                         break;
                     case R.id.nav_music:
                         break;
@@ -92,23 +125,33 @@ public class MainActivity extends BaseAcitivity{
                 return true;
             }
         });
-        mNavigateTabBar = (MainNavigateTabBar) findViewById(R.id.mainTabBar);
     }
 
+    private void initDrawer() {
+        setSupportActionBar(toolbar);
 
-    @Override
-    protected void setSaveInstanceState(Bundle savedInstanceState) {
+        final ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.mipmap.ic_menu);
+        ab.setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(toolbar);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, mDrawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        mDrawerLayout.addDrawerListener(toggle);
+//        //设置左上角显示三道横线
+//        toggle.syncState();
+//        toolbar.setTitle(R.string.app_name);
+    }
 
-        if (savedInstanceState != null){
-            mNavigateTabBar.onRestoreInstanceState(savedInstanceState);
+    private void initStatusBar() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            //将侧边栏顶部延伸至status bar
+            mDrawerLayout.setFitsSystemWindows(true);
 
+            //将主页面顶部延伸至 status bar
+            mDrawerLayout.setClipToPadding(false);
         }
-        mNavigateTabBar.addTab(HomeMvpFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.comui_tab_home, R.mipmap.comui_tab_home_selected, TAG_PAGE_HOME));
-        mNavigateTabBar.addTab(MessageMvpFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.comui_tab_city, R.mipmap.comui_tab_city_selected, TAG_PAGE_CITY));
-        mNavigateTabBar.addTab(null, new MainNavigateTabBar.TabParam(0, 0, TAG_PAGE_PUBLISH));
-        mNavigateTabBar.addTab(UnusedMvpFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.comui_tab_message, R.mipmap.comui_tab_message_selected, TAG_PAGE_MESSAGE));
-        mNavigateTabBar.addTab(MySelfMvpFragment.class, new MainNavigateTabBar.TabParam(R.mipmap.comui_tab_person, R.mipmap.comui_tab_person_selected, TAG_PAGE_PERSON));
     }
+
 
     @Override
     protected int getLayoutRes() {
@@ -149,14 +192,25 @@ public class MainActivity extends BaseAcitivity{
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mNavigateTabBar.onSaveInstanceState(outState);
+    public void onBackPressed() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            if (isBackPressed) {
+                super.onBackPressed();
+                return;
+            }
+
+            isBackPressed = true;
+
+            SnackBarUtil.show(mDrawerLayout, R.string.back_pressed_tip);
+
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isBackPressed = false;
+                }
+            }, 2000);
+        }
     }
-
-
-    public void onClickPublish(View v) {
-        CommonUtils.showToast("发布");
-    }
-
 }
